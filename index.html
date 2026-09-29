@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Адаптация сайта под телефоны и планшеты -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Профессиональная уборка квартир. Поддерживающая, генеральная уборка и уборка после переезда."
+    >
+
+    <title>Чистая квартира — профессиональная уборка квартир</title>
+
+    <!-- ======================================================
+         CSS — ВСЕ СТИЛИ САЙТА
+         ====================================================== -->
+    <style>
+        :root {
+            --primary: #236cfe;
+            --primary-dark: #1756d1;
+            --accent: #2dd4bf;
+            --dark: #10213b;
+            --text: #526176;
+            --light: #f4f8ff;
+            --white: #ffffff;
+            --border: #dfe7f2;
+            --success: #12835b;
+            --error: #c43e4e;
+            --shadow: 0 20px 60px rgba(27, 69, 133, 0.12);
+            --radius: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-width: 320px;
+            overflow-x: hidden;
+            color: var(--dark);
+            background: var(--white);
+            font-family:
+                Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img,
+        svg {
+            display: block;
+            max-width: 100%;
+        }
+
+        .container {
+            width: min(1160px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 96px 0;
+        }
+
+        .section-light {
+            background: var(--light);
+        }
+
+        .section-heading {
+            max-width: 700px;
+            margin-bottom: 48px;
+        }
+
+        .section-heading.center {
+            margin-right: auto;
+            margin-left: auto;
+            text-align: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            width: 24px;
+            height: 3px;
+            border-radius: 10px;
+            background: var(--accent);
+            content: "";
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--dark);
+            line-height: 1.15;
+        }
+
+        h1 {
+            max-width: 760px;
+            margin-bottom: 24px;
+            font-size: clamp(42px, 6vw, 76px);
+            letter-spacing: -0.045em;
+        }
+
+        h2 {
+            margin-bottom: 18px;
+            font-size: clamp(34px, 4vw, 52px);
+            letter-spacing: -0.035em;
+        }
+
+        h3 {
+            font-size: 22px;
+        }
+
+        .section-description {
+            color: var(--text);
+            font-size: 18px;
+        }
+
+        .button {
+            display: inline-flex;
+            min-height: 54px;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 24px;
+            border: 0;
+            border-radius: 15px;
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 12px 28px rgba(35, 108, 254, 0.24);
+            cursor: pointer;
+            font-weight: 800;
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .button:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 16px 32px rgba(35, 108, 254, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        .button:disabled {
+            cursor: not-allowed;
+            opacity: 0.65;
+            transform: none;
+        }
+
+        .button-secondary {
+            border: 1px solid var(--border);
+            background: var(--white);
+            color: var(--dark);
+            box-shadow: none;
+        }
+
+        .button-secondary:hover {
+            background: var(--light);
+        }
+
+        /* =========================
+           Шапка сайта
+           ========================= */
+
+        .header {
+            position: sticky;
+            z-index: 1000;
+            top: 0;
+            border-bottom: 1px solid rgba(223, 231, 242, 0.8);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(18px);
+        }
+
+        .navbar {
+            display: flex;
+            min-height: 76px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            font-size: 19px;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-icon {
+            display: grid;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            border-radius: 13px;
+            background: linear-gradient(135deg, var(--primary), #65a6ff);
+            color: var(--white);
+            font-size: 21px;
+            box-shadow: 0 10px 25px rgba(35, 108, 254, 0.22);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a:not(.button) {
+            color: var(--text);
+            font-size: 15px;
+            font-weight: 700;
+            transition: color 0.2s ease;
+        }
+
+        .nav-menu a:not(.button):hover {
+            color: var(--primary);
+        }
+
+        .menu-button {
+            display: none;
+            width: 46px;
+            height: 46px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: var(--white);
+            cursor: pointer;
+        }
+
+        .menu-button span {
+            display: block;
+            width: 21px;
+            height: 2px;
+            margin: 5px auto;
+            border-radius: 3px;
+            background: var(--dark);
+            transition: 0.2s ease;
+        }
+
+        /* =========================
+           Первый экран
+           ========================= */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 92px 0 90px;
+            background:
+                radial-gradient(circle at 85% 20%, rgba(45, 212, 191, 0.16), transparent 28%),
+                radial-gradient(circle at 10% 10%, rgba(35, 108, 254, 0.14), transparent 30%),
+                linear-gradient(180deg, #ffffff 0%, #f6f9ff 100%);
+        }
+
+        .hero::after {
+            position: absolute;
+            z-index: 0;
+            right: -100px;
+            bottom: -170px;
+            width: 420px;
+            height: 420px;
+            border: 80px solid rgba(35, 108, 254, 0.05);
+            border-radius: 50%;
+            content: "";
+        }
+
+        .hero-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            align-items: center;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 72px;
+        }
+
+        .hero-text {
+            position: relative;
+        }
+
+        .hero-text p {
+            max-width: 650px;
+            margin-bottom: 34px;
+            color: var(--text);
+            font-size: 20px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .hero-points {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 28px;
+            margin-top: 32px;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .hero-point {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .check {
+            display: grid;
+            width: 22px;
+            height: 22px;
+            flex: 0 0 22px;
+            place-items: center;
+            border-radius: 50%;
+            background: #ddf9f2;
+            color: var(--success);
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .clean-card {
+            position: relative;
+            padding: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            border-radius: 34px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: var(--shadow);
+        }
+
+        .room {
+            position: relative;
+            height: 360px;
+            overflow: hidden;
+            border-radius: 25px;
+            background:
+                linear-gradient(90deg, transparent 49.7%, rgba(255,255,255,.7) 50%, transparent 50.3%),
+                linear-gradient(#d7ebff 0 55%, #e9d8c3 55%);
+        }
+
+        .window {
+            position: absolute;
+            top: 42px;
+            left: 50%;
+            width: 155px;
+            height: 130px;
+            border: 9px solid #fff;
+            background:
+                linear-gradient(90deg, transparent 47%, #fff 47% 53%, transparent 53%),
+                linear-gradient(transparent 47%, #fff 47% 53%, transparent 53%),
+                linear-gradient(160deg, #a6ddff, #eef9ff);
+            box-shadow: 0 12px 30px rgba(31, 90, 150, 0.12);
+            transform: translateX(-50%);
+        }
+
+        .sofa {
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            width: 250px;
+            height: 100px;
+            border-radius: 35px 35px 15px 15px;
+            background: #246ffe;
+            box-shadow: 0 16px 25px rgba(20, 60, 130, 0.18);
+            transform: translateX(-50%);
+        }
+
+        .sofa::before,
+        .sofa::after {
+            position: absolute;
+            top: -18px;
+            width: 100px;
+            height: 58px;
+            border: 4px solid rgba(255, 255, 255, 0.22);
+            border-radius: 22px;
+            background: #4d8bff;
+            content: "";
+        }
+
+        .sofa::before {
+            left: 18px;
+        }
+
+        .sofa::after {
+            right: 18px;
+        }
+
+        .plant {
+            position: absolute;
+            right: 18px;
+            bottom: 42px;
+            font-size: 75px;
+        }
+
+        .clean-badge {
+            position: absolute;
+            bottom: 12px;
+            left: -18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            border-radius: 17px;
+            background: var(--white);
+            box-shadow: var(--shadow);
+            font-weight: 900;
+        }
+
+        .clean-badge span:first-child {
+            display: grid;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            border-radius: 13px;
+            background: #ddf9f2;
+            font-size: 21px;
+        }
+
+        .clean-badge small {
+            display: block;
+            color: var(--text);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* =========================
+           Преимущества
+           ========================= */
+
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .advantage {
+            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            background: var(--white);
+        }
+
+        .advantage-icon,
+        .service-icon {
+            display: grid;
+            width: 54px;
+            height: 54px;
+            margin-bottom: 20px;
+            place-items: center;
+            border-radius: 16px;
+            background: #eaf2ff;
+            font-size: 25px;
+        }
+
+        .advantage h3 {
+            margin-bottom: 10px;
+            font-size: 19px;
+        }
+
+        .advantage p {
+            color: var(--text);
+            font-size: 15px;
+        }
+
+        /* =========================
+           Виды уборки
+           ========================= */
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            display: flex;
+            min-height: 100%;
+            flex-direction: column;
+            padding: 32px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--white);
+            box-shadow: 0 10px 35px rgba(21, 59, 105, 0.05);
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .service-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+
+        .service-card.featured {
+            border: 2px solid var(--primary);
+        }
+
+        .popular {
+            align-self: flex-start;
+            margin-bottom: 15px;
+            padding: 5px 11px;
+            border-radius: 20px;
+            background: #e9f1ff;
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .service-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .price {
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-size: 26px;
+            font-weight: 900;
+        }
+
+        .service-list {
+            display: grid;
+            gap: 11px;
+            margin-bottom: 28px;
+            list-style: none;
+        }
+
+        .service-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            color: var(--text);
+            font-size: 15px;
+        }
+
+        .service-list li::before {
+            color: var(--success);
+            content: "✓";
+            font-weight: 900;
+        }
+
+        .service-card .button {
+            width: 100%;
+            margin-top: auto;
+        }
+
+        /* =========================
+           Этапы работы
+           ========================= */
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            counter-reset: steps;
+        }
+
+        .step {
+            position: relative;
+            padding: 30px;
+            border-radius: 22px;
+            background: var(--white);
+            counter-increment: steps;
+        }
+
+        .step::before {
+            display: grid;
+            width: 48px;
+            height: 48px;
+            margin-bottom: 22px;
+            place-items: center;
+            border-radius: 15px;
+            background: var(--primary);
+            color: var(--white);
+            content: counter(steps);
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .step:not(:last-child)::after {
+            position: absolute;
+            top: 53px;
+            right: -18px;
+            z-index: 2;
+            color: var(--primary);
+            content: "→";
+            font-size: 25px;
+            font-weight: 900;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+            font-size: 19px;
+        }
+
+        .step p {
+            color: var(--text);
+            font-size: 15px;
+        }
+
+        /* =========================
+           Форма заявки
+           ========================= */
+
+        .order-wrapper {
+            display: grid;
+            overflow: hidden;
+            border-radius: 32px;
+            background: var(--dark);
+            box-shadow: var(--shadow);
+            grid-template-columns: 1fr 0.85fr;
+        }
+
+        .order-content {
+            padding: 64px;
+            color: var(--white);
+            background:
+                radial-gradient(circle at 15% 100%, rgba(45, 212, 191, 0.22), transparent 35%),
+                var(--dark);
+        }
+
+        .order-content h2 {
+            color: var(--white);
+        }
+
+        .order-content p {
+            max-width: 540px;
+            color: #c4d1e3;
+            font-size: 18px;
+        }
+
+        .order-benefits {
+            display: grid;
+            gap: 14px;
+            margin-top: 30px;
+            list-style: none;
+        }
+
+        .order-benefits li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+
+        .order-form-box {
+            padding: 50px;
+            background: var(--white);
+        }
+
+        .order-form-box h3 {
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+
+        .form-description {
+            margin-bottom: 28px;
+            color: var(--text);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .form-group input {
+            width: 100%;
+            height: 58px;
+            padding: 0 17px;
+            outline: none;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #fbfdff;
+            color: var(--dark);
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(35, 108, 254, 0.1);
+        }
+
+        .form-submit {
+            width: 100%;
+            margin-top: 4px;
+        }
+
+        .privacy {
+            margin-top: 14px;
+            color: #7a8799;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .form-status {
+            display: none;
+            margin-top: 15px;
+            padding: 12px 14px;
+            border-radius: 11px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .form-status.success {
+            display: block;
+            background: #e0f8ef;
+            color: var(--success);
+        }
+
+        .form-status.error {
+            display: block;
+            background: #fff0f1;
+            color: var(--error);
+        }
+
+        /* Поле-ловушка от спам-ботов */
+        .website-field {
+            position: absolute !important;
+            left: -9999px !important;
+            width: 1px !important;
+            height: 1px !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        /* =========================
+           Подвал
+           ========================= */
+
+        .footer {
+            padding: 28px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        /* =========================
+           Адаптация под планшеты
+           ========================= */
+
+        @media (max-width: 960px) {
+            .hero-grid,
+            .order-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-grid {
+                gap: 50px;
+            }
+
+            .clean-card {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .advantages,
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                max-width: 650px;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .step::after {
+                display: none;
+            }
+        }
+
+        /* =========================
+           Адаптация под телефоны
+           ========================= */
+
+        @media (max-width: 760px) {
+            .container {
+                width: min(100% - 28px, 1160px);
+            }
+
+            .section {
+                padding: 72px 0;
+            }
+
+            .navbar {
+                min-height: 68px;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 68px;
+                right: 0;
+                left: 0;
+                display: flex;
+                max-height: 0;
+                overflow: hidden;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                border-bottom: 1px solid var(--border);
+                background: var(--white);
+                opacity: 0;
+                transition:
+                    max-height 0.3s ease,
+                    opacity 0.2s ease;
+            }
+
+            .nav-menu.open {
+                max-height: 420px;
+                padding: 16px 20px 24px;
+                opacity: 1;
+            }
+
+            .nav-menu li {
+                width: 100%;
+            }
+
+            .nav-menu a:not(.button) {
+                display: block;
+                padding: 14px 8px;
+            }
+
+            .nav-menu .button {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .hero {
+                padding: 66px 0 72px;
+            }
+
+            .hero-grid {
+                gap: 44px;
+            }
+
+            .hero-text p {
+                font-size: 17px;
+            }
+
+            .hero-buttons .button {
+                width: 100%;
+            }
+
+            .hero-points {
+                display: grid;
+                gap: 13px;
+            }
+
+            .clean-card {
+                padding: 15px;
+                border-radius: 25px;
+            }
+
+            .room {
+                height: 300px;
+            }
+
+            .plant {
+                right: 4px;
+                font-size: 58px;
+            }
+
+            .sofa {
+                width: 210px;
+            }
+
+            .sofa::before,
+            .sofa::after {
+                width: 82px;
+            }
+
+            .clean-badge {
+                bottom: -12px;
+                left: 6px;
+            }
+
+            .advantages,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading {
+                margin-bottom: 34px;
+            }
+
+            .order-content,
+            .order-form-box {
+                padding: 38px 24px;
+            }
+
+            .footer-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 390px) {
+            h1 {
+                font-size: 38px;
+            }
+
+            .room {
+                height: 270px;
+            }
+
+            .window {
+                width: 130px;
+                height: 110px;
+            }
+
+            .sofa {
+                width: 185px;
+            }
+
+            .sofa::before,
+            .sofa::after {
+                width: 70px;
+            }
+
+            .clean-badge {
+                padding: 12px 14px;
+            }
+        }
+
+        /* Уменьшение анимаций по настройкам устройства */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ======================================================
+         ШАПКА
+         ====================================================== -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="#home" class="logo" aria-label="На главную">
+                <span class="logo-icon">✦</span>
+                <span>Чистая квартира</span>
+            </a>
+
+            <button
+                class="menu-button"
+                id="menuButton"
+                type="button"
+                aria-label="Открыть меню"
+                aria-expanded="false"
+                aria-controls="navMenu"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#services">Виды уборки</a></li>
+                <li><a href="#advantages">Преимущества</a></li>
+                <li><a href="#steps">Как работаем</a></li>
+                <li><a href="#order" class="button">Оставить заявку</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ==================================================
+             ПЕРВЫЙ ЭКРАН
+             ================================================== -->
+        <section class="hero" id="home">
+            <div class="container hero-grid">
+                <div class="hero-text">
+                    <div class="eyebrow">Уборка квартир</div>
+
+                    <h1>Чистота, в которую хочется возвращаться</h1>
+
+                    <p>
+                        Профессионально уберём вашу квартиру, наведём порядок
+                        и освободим время для действительно важных дел.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#order" class="button">
+                            Заказать уборку
+                            <span>→</span>
+                        </a>
+
+                        <a href="#services" class="button button-secondary">
+                            Посмотреть цены
+                        </a>
+                    </div>
+
+                    <div class="hero-points">
+                        <div class="hero-point">
+                            <span class="check">✓</span>
+                            Проверенные клинеры
+                        </div>
+
+                        <div class="hero-point">
+                            <span class="check">✓</span>
+                            Безопасные средства
+                        </div>
+
+                        <div class="hero-point">
+                            <span class="check">✓</span>
+                            Гарантия качества
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clean-card" aria-label="Чистая и уютная квартира">
+                    <div class="room">
+                        <div class="window"></div>
+                        <div class="sofa"></div>
+                        <div class="plant">🪴</div>
+                    </div>
+
+                    <div class="clean-badge">
+                        <span>✨</span>
+                        <span>
+                            Идеально чисто
+                            <small>После каждой уборки</small>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================
+             ПРЕИМУЩЕСТВА
+             ================================================== -->
+        <section class="section" id="advantages">
+            <div class="container">
+                <div class="section-heading center">
+                    <div class="eyebrow">Почему выбирают нас</div>
+
+                    <h2>Заботимся о вашей квартире</h2>
+
+                    <p class="section-description">
+                        Всё необходимое для уборки привозим с собой.
+                        Вам остаётся только оценить результат.
+                    </p>
+                </div>
+
+                <div class="advantages">
+                    <article class="advantage">
+                        <div class="advantage-icon">🧹</div>
+                        <h3>Всё с собой</h3>
+                        <p>
+                            Привозим профессиональные средства,
+                            инвентарь и оборудование.
+                        </p>
+                    </article>
+
+                    <article class="advantage">
+                        <div class="advantage-icon">🛡️</div>
+                        <h3>Безопасно</h3>
+                        <p>
+                            Используем бережные средства для мебели,
+                            техники и разных поверхностей.
+                        </p>
+                    </article>
+
+                    <article class="advantage">
+                        <div class="advantage-icon">⏱️</div>
+                        <h3>Точно по времени</h3>
+                        <p>
+                            Приезжаем в согласованное время и не
+                            заставляем вас ждать.
+                        </p>
+                    </article>
+
+                    <article class="advantage">
+                        <div class="advantage-icon">✨</div>
+                        <h3>Гарантия качества</h3>
+                        <p>
+                            Проверяем результат и устраняем замечания,
+                            если они возникнут.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================
+             ВИДЫ УБОРКИ И ЦЕНЫ
+             ================================================== -->
+        <section class="section section-light" id="services">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="eyebrow">Услуги и цены</div>
+
+                    <h2>Выберите подходящую уборку</h2>
+
+                    <p class="section-description">
+                        Точная стоимость зависит от площади и состояния
+                        квартиры. Мы согласуем её до начала работ.
+                    </p>
+                </div>
+
+                <div class="services">
+                    <article class="service-card">
+                        <div class="service-icon">🫧</div>
+                        <h3>Поддерживающая</h3>
+                        <div class="price">от 2 490 ₽</div>
+
+                        <ul class="service-list">
+                            <li>Протираем доступные поверхности</li>
+                            <li>Пылесосим и моем полы</li>
+                            <li>Убираем кухню снаружи</li>
+                            <li>Чистим ванную и санузел</li>
+                            <li>Выносим мусор</li>
+                        </ul>
+
+                        <a href="#order" class="button button-secondary">
+                            Оставить заявку
+                        </a>
+                    </article>
+
+                    <article class="service-card featured">
+                        <div class="popular">Популярный выбор</div>
+                        <div class="service-icon">✨</div>
+                        <h3>Генеральная</h3>
+                        <div class="price">от 5 490 ₽</div>
+
+                        <ul class="service-list">
+                            <li>Полная уборка всей квартиры</li>
+                            <li>Удаление сложных загрязнений</li>
+                            <li>Моем фасады и кухонные поверхности</li>
+                            <li>Чистим сантехнику и кафель</li>
+                            <li>Протираем двери и плинтусы</li>
+                        </ul>
+
+                        <a href="#order" class="button">
+                            Оставить заявку
+                        </a>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon">📦</div>
+                        <h3>После переезда</h3>
+                        <div class="price">от 6 490 ₽</div>
+
+                        <ul class="service-list">
+                            <li>Убираем пустую квартиру</li>
+                            <li>Моем шкафы внутри и снаружи</li>
+                            <li>Удаляем пыль со всех поверхностей</li>
+                            <li>Чистим кухню и санузел</li>
+                            <li>Подготавливаем квартиру к заселению</li>
+                        </ul>
+
+                        <a href="#order" class="button button-secondary">
+                            Оставить заявку
+                        </a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================
+             ЭТАПЫ РАБОТЫ
+             ================================================== -->
+        <section class="section" id="steps">
+            <div class="container">
+                <div class="section-heading center">
+                    <div class="eyebrow">Как всё происходит</div>
+                    <h2>Чистая квартира за четыре шага</h2>
+                </div>
+
+                <div class="steps">
+                    <article class="step">
+                        <h3>Оставляете заявку</h3>
+                        <p>
+                            Указываете своё имя и номер телефона
+                            в форме на сайте.
+                        </p>
+                    </article>
+
+                    <article class="step">
+                        <h3>Уточняем детали</h3>
+                        <p>
+                            Связываемся с вами, узнаём площадь
+                            и согласовываем стоимость.
+                        </p>
+                    </article>
+
+                    <article class="step">
+                        <h3>Наводим чистоту</h3>
+                        <p>
+                            Клинер приезжает в назначенное время
+                            со всем необходимым.
+                        </p>
+                    </article>
+
+                    <article class="step">
+                        <h3>Вы принимаете работу</h3>
+                        <p>
+                            Проверяете результат и наслаждаетесь
+                            чистотой в квартире.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================
+             ФОРМА ЗАЯВКИ
+             ================================================== -->
+        <section class="section section-light" id="order">
+            <div class="container">
+                <div class="order-wrapper">
+                    <div class="order-content">
+                        <div class="eyebrow">Оставить заявку</div>
+
+                        <h2>Рассчитаем стоимость уборки</h2>
+
+                        <p>
+                            Оставьте имя и номер телефона. Мы свяжемся
+                            с вами, зададим несколько вопросов и назовём
+                            точную стоимость.
+                        </p>
+
+                        <ul class="order-benefits">
+                            <li><span class="check">✓</span> Без скрытых доплат</li>
+                            <li><span class="check">✓</span> Цена известна заранее</li>
+                            <li><span class="check">✓</span> Удобное время приезда</li>
+                        </ul>
+                    </div>
+
+                    <div class="order-form-box">
+                        <h3>Заказать уборку</h3>
+
+                        <p class="form-description">
+                            Заполните два поля — это займёт меньше минуты.
+                        </p>
+
+                        <!--
+                            action — резервная отправка формы без JavaScript.
+                            Адрес FormSubmit содержит почту получателя.
+                        -->
+                        <form
+                            id="orderForm"
+                            action="https://formsubmit.co/foktov6@vk.com"
+                            method="POST"
+                        >
+                            <!-- Тема письма -->
+                            <input
+                                type="hidden"
+                                name="_subject"
+                                value="Новая заявка на уборку квартиры"
+                            >
+
+                            <!-- Красивое табличное оформление письма -->
+                            <input
+                                type="hidden"
+                                name="_template"
+                                value="table"
+                            >
+
+                            <!-- Отключение стандартной капчи FormSubmit -->
+                            <input
+                                type="hidden"
+                                name="_captcha"
+                                value="false"
+                            >
+
+                            <!-- Поле-ловушка от автоматического спама -->
+                            <div class="website-field" aria-hidden="true">
+                                <label for="website">Не заполняйте это поле</label>
+                                <input
+                                    id="website"
+                                    type="text"
+                                    name="_honey"
+                                    tabindex="-1"
+                                    autocomplete="off"
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="clientName">Ваше имя</label>
+                                <input
+                                    id="clientName"
+                                    type="text"
+                                    name="Имя"
+                                    placeholder="Например, Анна"
+                                    minlength="2"
+                                    maxlength="40"
+                                    autocomplete="name"
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="clientPhone">Номер телефона</label>
+                                <input
+                                    id="clientPhone"
+                                    type="tel"
+                                    name="Телефон"
+                                    placeholder="+7 (999) 000-00-00"
+                                    inputmode="tel"
+                                    autocomplete="tel"
+                                    maxlength="20"
+                                    required
+                                >
+                            </div>
+
+                            <button
+                                class="button form-submit"
+                                id="submitButton"
+                                type="submit"
+                            >
+                                <span class="button-text">Отправить заявку</span>
+                            </button>
+
+                            <p class="privacy">
+                                Нажимая кнопку, вы соглашаетесь на обработку
+                                данных для связи по заявке.
+                            </p>
+
+                            <div
+                                class="form-status"
+                                id="formStatus"
+                                role="status"
+                                aria-live="polite"
+                            ></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ======================================================
+         ПОДВАЛ
+         ====================================================== -->
+    <footer class="footer">
+        <div class="container footer-row">
+            <a href="#home" class="logo">
+                <span class="logo-icon">✦</span>
+                <span>Чистая квартира</span>
+            </a>
+
+            <p>
+                © <span id="currentYear"></span> Уборка квартир.
+                Все права защищены.
+            </p>
+        </div>
+    </footer>
+
+    <!-- ======================================================
+         JAVASCRIPT — ЛОГИКА САЙТА
+         ====================================================== -->
+    <script>
+        /*
+         * =====================================================
+         * 1. НАСТРОЙКИ ОТПРАВКИ
+         * =====================================================
+         *
+         * EMAIL — адрес, на который приходят заявки.
+         * FORMSUBMIT_URL — адрес сервиса отправки заявок.
+         */
+
+        const EMAIL = "foktov6@vk.com";
+        const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${EMAIL}`;
+
+        /*
+         * =====================================================
+         * 2. МОБИЛЬНОЕ МЕНЮ
+         * =====================================================
+         */
+
+        const menuButton = document.getElementById("menuButton");
+        const navMenu = document.getElementById("navMenu");
+        const navLinks = navMenu.querySelectorAll("a");
+
+        function closeMenu() {
+            navMenu.classList.remove("open");
+            menuButton.setAttribute("aria-expanded", "false");
+            document.body.classList.remove("menu-open");
+        }
+
+        menuButton.addEventListener("click", function () {
+            const menuIsOpen = navMenu.classList.toggle("open");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                String(menuIsOpen)
+            );
+
+            document.body.classList.toggle("menu-open", menuIsOpen);
+        });
+
+        navLinks.forEach(function (link) {
+            link.addEventListener("click", closeMenu);
+        });
+
+        window.addEventListener("resize", function () {
+            if (window.innerWidth > 760) {
+                closeMenu();
+            }
+        });
+
+        /*
+         * =====================================================
+         * 3. ТЕКУЩИЙ ГОД В ПОДВАЛЕ
+         * =====================================================
+         */
+
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
+
+        /*
+         * =====================================================
+         * 4. ПРОВЕРКА И ФОРМАТИРОВАНИЕ ТЕЛЕФОНА
+         * =====================================================
+         */
+
+        const phoneInput = document.getElementById("clientPhone");
+
+        phoneInput.addEventListener("input", function () {
+            /*
+             * Разрешаем вводить только цифры, пробелы,
+             * круглые скобки, плюс и дефис.
+             */
+            this.value = this.value.replace(/[^0-9+\-()\s]/g, "");
+
+            /*
+             * Сбрасываем старую ошибку после изменения номера.
+             */
+            this.setCustomValidity("");
+        });
+
+        phoneInput.addEventListener("blur", function () {
+            const phoneDigits = this.value.replace(/\D/g, "");
+
+            if (this.value && phoneDigits.length < 10) {
+                this.setCustomValidity(
+                    "Введите номер телефона минимум из 10 цифр"
+                );
+            } else {
+                this.setCustomValidity("");
+            }
+        });
+
+        /*
+         * =====================================================
+         * 5. ОТПРАВКА ЗАЯВКИ НА ПОЧТУ
+         * =====================================================
+         */
+
+        const orderForm = document.getElementById("orderForm");
+        const submitButton = document.getElementById("submitButton");
+        const buttonText = submitButton.querySelector(".button-text");
+        const formStatus = document.getElementById("formStatus");
+
+        orderForm.addEventListener("submit", async function (event) {
+            /*
+             * Останавливаем обычную перезагрузку страницы.
+             */
+            event.preventDefault();
+
+            const phoneDigits = phoneInput.value.replace(/\D/g, "");
+
+            /*
+             * Дополнительная проверка телефона перед отправкой.
+             */
+            if (phoneDigits.length < 10) {
+                phoneInput.setCustomValidity(
+                    "Введите номер телефона минимум из 10 цифр"
+                );
+
+                phoneInput.reportValidity();
+                phoneInput.focus();
+                return;
+            }
+
+            phoneInput.setCustomValidity("");
+
+            /*
+             * Проверяем все required, minlength и maxlength.
+             */
+            if (!orderForm.checkValidity()) {
+                orderForm.reportValidity();
+                return;
+            }
+
+            /*
+             * Показываем состояние загрузки.
+             */
+            submitButton.disabled = true;
+            buttonText.textContent = "Отправляем...";
+            formStatus.className = "form-status";
+            formStatus.textContent = "";
+
+            /*
+             * Собираем имя, телефон и скрытые поля формы.
+             */
+            const formData = new FormData(orderForm);
+
+            try {
+                /*
+                 * Отправляем данные на FormSubmit.
+                 * Сервис пересылает заявку на указанную почту.
+                 */
+                const response = await fetch(FORMSUBMIT_URL, {
+                    method: "POST",
+                    headers: {
+                        "Accept": "application/json"
+                    },
+                    body: formData
+                });
+
+                let result = {};
+
+                try {
+                    result = await response.json();
+                } catch (jsonError) {
+                    result = {};
+                }
+
+                if (!response.ok) {
+                    throw new Error(
+                        result.message || "Сервис не принял заявку"
+                    );
+                }
+
+                /*
+                 * Если отправка прошла успешно:
+                 * очищаем форму и выводим сообщение.
+                 */
+                orderForm.reset();
+
+                formStatus.className = "form-status success";
+                formStatus.textContent =
+                    "Спасибо! Заявка отправлена. Мы скоро свяжемся с вами.";
+            } catch (error) {
+                /*
+                 * Это сообщение увидит посетитель, если нет интернета
+                 * или сервис FormSubmit временно недоступен.
+                 */
+                console.error("Ошибка отправки формы:", error);
+
+                formStatus.className = "form-status error";
+                formStatus.textContent =
+                    "Не удалось отправить заявку. Проверьте интернет и попробуйте ещё раз.";
+            } finally {
+                /*
+                 * Возвращаем кнопке обычный вид.
+                 */
+                submitButton.disabled = false;
+                buttonText.textContent = "Отправить заявку";
+            }
+        });
+    </script>
+</body>
+</html>
